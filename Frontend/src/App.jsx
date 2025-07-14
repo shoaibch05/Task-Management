@@ -1,21 +1,29 @@
-import { useEffect, useState } from 'react'
-
+import Dashboard from "./components/Dashboard";
+import People from "./components/People";
+import { Login } from "./components/Login";
+import { SignUp } from "./components/SignUp";
+import { Route, Routes } from "react-router";
+import CreateBoardModal from "./components/SmallComponents/CreateBoardModal";
 
 function App() {
+  const boards = [
+    { id: 1, title: "Marketing", color: "bg-blue-500" },
+    { id: 2, title: "Development", color: "bg-green-500" },
+    { id: 3, title: "Planning", color: "bg-yellow-500" },
+    { id: 4, title: "Deployment", color: "bg-pink-400" },
+  ];
 
   return (
-    <nav>
-      <div className="flex items-center justify-between p-4 bg-gray-800 text-white">
-        <div className="text-lg font-bold bg">Task Management</div>
-        <div className='flex s items-center space-x-4'>
-          <h4>Dont have an Account?</h4>
-          
-          <button className="bg-blue-500 p-2 border-1 border-solid border-white ">Sign Up</button>
-      
-        </div>
-      </div>
-    </nav>
-  )
+    <>
+      <Routes>
+        <Route path="/" element={<Dashboard boards={boards} />} />
+        <Route path="/Create-Board" element={<CreateBoardModal />} />
+        <Route path="/people" element={<People boards={boards} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
